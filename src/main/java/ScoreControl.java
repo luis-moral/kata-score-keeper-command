@@ -1,7 +1,8 @@
 public class ScoreControl {
-    Command[] onePointCommands;
-    Command[] twoPointsCommands;
-    Command[] threePointsCommands;
+    private Command[] onePointCommands;
+    private Command[] twoPointsCommands;
+    private Command[] threePointsCommands;
+    private Command lastCommand;
 
     public ScoreControl() {
         onePointCommands = new Command[2];
@@ -17,13 +18,22 @@ public class ScoreControl {
 
     public void addOnePointButtonWasPushed(int row) {
         onePointCommands[row].execute();
+        lastCommand = onePointCommands[row];
     }
 
     public void addTwoPointsButtonWasPushed(int row) {
         twoPointsCommands[row].execute();
+        lastCommand = twoPointsCommands[row];
     }
 
     public void addThreePointsButtonWasPushed(int row) {
         threePointsCommands[row].execute();
+        lastCommand = threePointsCommands[row];
+    }
+
+    public void undoLastButtonWasPushed() {
+        if (lastCommand != null) {
+            lastCommand.undo();
+        }
     }
 }

@@ -1,5 +1,7 @@
 public class AddTwoPointsCommand implements Command {
 
+    public static final int TWO_POINTS = 2;
+
     private Score score;
 
     public AddTwoPointsCommand(Score score) {
@@ -8,6 +10,11 @@ public class AddTwoPointsCommand implements Command {
 
     @Override
     public void execute() {
-        score.addPoints(2);
+        score.addPoints(TWO_POINTS);
+    }
+
+    @Override
+    public void undo() {
+        score.addPoints(-TWO_POINTS);
     }
 }

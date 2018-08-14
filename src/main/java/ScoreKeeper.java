@@ -1,5 +1,7 @@
 public class ScoreKeeper {
 
+    public static final int TEAM_A = 0;
+    public static final int TEAM_B = 1;
     private ScoreControl scoreControl;
     private Score scoreTeamA;
     private Score scoreTeamB;
@@ -19,36 +21,39 @@ public class ScoreKeeper {
         AddThreePointsCommand addThreePointsToTeamACommand = new AddThreePointsCommand(scoreTeamA);
         AddThreePointsCommand addThreePointsToTeamBCommand = new AddThreePointsCommand(scoreTeamB);
 
-        scoreControl.setCommand(0, addOnePointToTeamACommand, addTwoPointsToTeamACommand, addThreePointsToTeamACommand);
-        scoreControl.setCommand(1, addOnePointToTeamBCommand, addTwoPointsToTeamBCommand, addThreePointsToTeamBCommand);
-
+        scoreControl.setCommand(TEAM_A, addOnePointToTeamACommand, addTwoPointsToTeamACommand, addThreePointsToTeamACommand);
+        scoreControl.setCommand(TEAM_B, addOnePointToTeamBCommand, addTwoPointsToTeamBCommand, addThreePointsToTeamBCommand);
     }
 
     public void scoreTeamA1() {
-        scoreControl.addOnePointButtonWasPushed(0);
+        scoreControl.addOnePointButtonWasPushed(TEAM_A);
     }
 
     public void scoreTeamA2() {
-        scoreControl.addTwoPointsButtonWasPushed(0);
+        scoreControl.addTwoPointsButtonWasPushed(TEAM_A);
     }
 
     public void scoreTeamA3() {
-        scoreControl.addThreePointsButtonWasPushed(0);
+        scoreControl.addThreePointsButtonWasPushed(TEAM_A);
     }
 
     public void scoreTeamB1() {
-        scoreControl.addOnePointButtonWasPushed(1);
+        scoreControl.addOnePointButtonWasPushed(TEAM_B);
     }
 
     public void scoreTeamB2() {
-        scoreControl.addTwoPointsButtonWasPushed(1);
+        scoreControl.addTwoPointsButtonWasPushed(TEAM_B);
     }
 
     public void scoreTeamB3() {
-        scoreControl.addThreePointsButtonWasPushed(1);
+        scoreControl.addThreePointsButtonWasPushed(TEAM_B);
     }
 
     public String getScore() {
         return String.format("%03d:%03d", scoreTeamA.getPoints(), scoreTeamB.getPoints());
+    }
+
+    public void undo() {
+        scoreControl.undoLastButtonWasPushed();
     }
 }
